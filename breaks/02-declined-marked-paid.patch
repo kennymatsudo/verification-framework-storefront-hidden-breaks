@@ -1,0 +1,13 @@
+diff --git a/shop/main.py b/shop/main.py
+index 87dc0b5..dabdace 100644
+--- a/shop/main.py
++++ b/shop/main.py
+@@ -92,7 +92,7 @@ def create_app(repository: db.Repository | None = None, payments: PaymentsClient
+                 request, "checkout.html", lines=lines, total_cents=total_cents,
+                 error="We couldn't reach the payment service. Your card was not charged.",
+             )
+-        if charge.status != "succeeded":
++        if charge.status == "error":
+             repository.set_order_status(order_id, "declined", charge.id)
+             return render(
+                 request, "checkout.html", lines=lines, total_cents=total_cents,

@@ -1,0 +1,23 @@
+{
+  "persona": "You are Kenny, the developer of the Northwind Goods storefront. Answer briefly and decisively. You never mention bugs you know about; you only know the requirements and how the app runs.",
+  "facts": [
+    "Start both services with scripts/dev.sh start; stop with scripts/dev.sh stop; scripts/dev.sh status prints each service's /health, which names the commit it runs.",
+    "The shop listens on 127.0.0.1:8800 and the payments service on 127.0.0.1:8801. Both are local stubs; nothing reaches a real payment network, so there are no shared side effects.",
+    "The shop's database is data/shop.sqlite and the payments ledger is data/payments.sqlite, both SQLite files under the repo; scripts/dev.sh reset removes them.",
+    "A card ending in 0002 is always declined by the payments service; any other number succeeds.",
+    "Expected behavior is in REQUIREMENTS.md and nowhere else.",
+    "Python dependencies are managed with uv; run things with uv run.",
+    "Commits are fine; the harness and its skills should be committed on the current branch. Never push.",
+    "On SC-3: an expired saved card is still listed at checkout, shown with an 'Expired' label and not selectable. It is not hidden, so the customer knows why it is unavailable and can remove it.",
+    "Put the harness in .agents/skills, the repo's shared skills directory."
+  ],
+  "rules": [
+    {"pattern": "expired|SC-3", "answer": "Show it, labelled Expired, and not selectable. Don't hide it; the customer should see why it's unavailable and be able to remove it."},
+    {"pattern": "where (should|to put|do you want) .*harness|skills director|\\.agents|\\.claude/skills", "answer": "Put it in .agents/skills."},
+    {"pattern": "commit", "answer": "Yes, commit it on this branch. Don't push."},
+    {"pattern": "side effect|real (mail|payment|money)|shared", "answer": "No shared side effects: the payments service is a local stub. Go ahead."},
+    {"pattern": "scope|which (behaviors|features)|how (much|many)", "answer": "Everything under Checkout and Cart in REQUIREMENTS.md. Leave Saved cards out; it isn't built."},
+    {"pattern": "approve|go ahead|proceed|ok to|okay to|shall i", "answer": "Approved. Go ahead."}
+  ],
+  "default": "Go ahead."
+}

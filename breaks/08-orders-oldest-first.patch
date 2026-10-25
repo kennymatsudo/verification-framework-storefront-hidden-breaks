@@ -1,0 +1,11 @@
+diff --git a/shop/db.py b/shop/db.py
+index 090aa27..cd0e6ab 100644
+--- a/shop/db.py
++++ b/shop/db.py
+@@ -147,5 +147,5 @@ class Repository:
+ 
+     def orders(self, customer_id: int) -> list[sqlite3.Row]:
+         return self.connection.execute(
+-            "SELECT * FROM orders WHERE customer_id = ? ORDER BY id DESC", (customer_id,)
++            "SELECT * FROM orders WHERE customer_id = ? ORDER BY id", (customer_id,)
+         ).fetchall()

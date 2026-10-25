@@ -1,0 +1,13 @@
+diff --git a/shop/main.py b/shop/main.py
+index 87dc0b5..f0f308c 100644
+--- a/shop/main.py
++++ b/shop/main.py
+@@ -80,8 +80,6 @@ def create_app(repository: db.Repository | None = None, payments: PaymentsClient
+     ):
+         repository = request.app.state.repository
+         lines = repository.cart(customer_id)
+-        if not lines:
+-            return RedirectResponse("/cart", status_code=303)
+         total_cents = sum(line["line_cents"] for line in lines)
+         order_id = repository.create_order(customer_id, lines, total_cents)
+         try:

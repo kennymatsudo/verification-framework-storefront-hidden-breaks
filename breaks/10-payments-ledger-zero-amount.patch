@@ -1,0 +1,13 @@
+diff --git a/payments/main.py b/payments/main.py
+index 83fafe1..4b92382 100644
+--- a/payments/main.py
++++ b/payments/main.py
+@@ -69,7 +69,7 @@ def create_charge(request: ChargeRequest):
+     charge_id = "ch_" + secrets.token_hex(6)
+     app.state.connection.execute(
+         "INSERT INTO charges (id, amount_cents, card_last4, status, created_at) VALUES (?, ?, ?, ?, ?)",
+-        (charge_id, request.amount_cents, digits[-4:], status, datetime.now(timezone.utc).isoformat(timespec="seconds")),
++        (charge_id, 0, digits[-4:], status, datetime.now(timezone.utc).isoformat(timespec="seconds")),
+     )
+     app.state.connection.commit()
+     return {"id": charge_id, "status": status, "amount_cents": request.amount_cents, "card_last4": digits[-4:]}
