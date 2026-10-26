@@ -1,12 +1,12 @@
 # Storefront demo: hidden breaks and answers
 
-Private companion to the public `storefront` demo repo. Nothing here is ever copied into the agent's workspace. It holds what the demo needs to grade the agent's work without the agent seeing it:
+Companion to [verification-framework-storefront-example](https://github.com/kennymatsudo/verification-framework-storefront-example). It was kept private until the demo was graded, and nothing in it was ever copied into the agent's workspace. It holds what the demo needs to grade the agent's work without the agent seeing it:
 
 - `breaks/*.patch`: deliberate bugs against the storefront's baseline commit, one behavior each. After the agent builds checks, each patch is applied to a scratch worktree and the agent's checks are run through the harness. A break the checks do not catch is a check that would pass on broken code.
 - `answers.json`: the developer's answers to the questions the skills ask, so a headless run of the demo gets the same answers every time. The answers never mention a break.
 - `grade.py`: applies each break and runs the harness, then reports which breaks were caught. Written once the harness exists, since it calls the harness's own tools.
 
-Published after the demo is filmed and graded, with the grading result, so the "caught every break it never saw" claim can be rerun by anyone.
+The grading result is in `results/`: nine of ten breaks caught, the tenth in a feature outside the agreed scope. Anyone can rerun it with `grade.py` against the example repo.
 
 ## Breaks
 
