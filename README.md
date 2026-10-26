@@ -8,7 +8,7 @@ Companion to [verification-framework-storefront-example](https://github.com/kenn
 - `unit-test-results.md`: which breaks the shop's own mocked unit tests catch. Four of the ten pass that suite; those are the ones only the harness can see.
 - `results/`: one file per grading run, with the tally and each check's result lines.
 
-The grading on 25 October 2026 caught nine of ten breaks at the example repo's commit `09dd5d0`. The miss, `08-orders-oldest-first`, is in the Orders feature, which was outside the scope the developer agreed to when the checks were built, so no check reads the orders page. To rerun it:
+The grading on 25 October 2026 caught nine of ten breaks at the example repo's commit `5409c15` (`09dd5d0` before its author was corrected). The miss, `08-orders-oldest-first`, is in the Orders feature, which was outside the scope the developer agreed to when the checks were built, so no check reads the orders page. To rerun it:
 
 ```sh
 git clone https://github.com/kennymatsudo/verification-framework-storefront-example ../storefront
