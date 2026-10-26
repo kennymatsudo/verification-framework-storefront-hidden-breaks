@@ -4,9 +4,16 @@ Companion to [verification-framework-storefront-example](https://github.com/kenn
 
 - `breaks/*.patch`: deliberate bugs against the storefront's baseline commit, one behavior each. After the agent builds checks, each patch is applied to a scratch worktree and the agent's checks are run through the harness. A break the checks do not catch is a check that would pass on broken code.
 - `answers.json`: the developer's answers to the questions the skills ask, so a headless run of the demo gets the same answers every time. The answers never mention a break.
-- `grade.py`: applies each break and runs the harness, then reports which breaks were caught. Written once the harness exists, since it calls the harness's own tools.
+- `grade.py`: applies each break to a scratch clone of the example repo, starts the app through its harness, runs every check with `vf.py verify`, and reports which breaks a check read as Failed. It calls the harness's own tools, so it needs a checkout of the example repo with the harness in it.
+- `unit-test-results.md`: which breaks the shop's own mocked unit tests catch. Four of the ten pass that suite; those are the ones only the harness can see.
+- `results/`: one file per grading run, with the tally and each check's result lines.
 
-The grading result is in `results/`: nine of ten breaks caught, the tenth in a feature outside the agreed scope. Anyone can rerun it with `grade.py` against the example repo.
+The grading on 25 October 2026 caught nine of ten breaks at the example repo's commit `09dd5d0`. The miss, `08-orders-oldest-first`, is in the Orders feature, which was outside the scope the developer agreed to when the checks were built, so no check reads the orders page. To rerun it:
+
+```sh
+git clone https://github.com/kennymatsudo/verification-framework-storefront-example ../storefront
+python3 grade.py ../storefront            # or --commit <sha>, --only 03,07
+```
 
 ## Breaks
 
